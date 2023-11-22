@@ -1,4 +1,4 @@
-const { response } = require("express");
+
 
 function addToCart(proId){
     $.ajax({

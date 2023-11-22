@@ -15,7 +15,7 @@
             </li>
             {{#if user}}
             <li class="nav-item">
-                <a class="nav-link" href="#">Orders</a>
+                <a class="nav-link" href="/orders">Orders</a>
             </li>
             {{/if}}
             </ul>
@@ -30,6 +30,7 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     {{#if user}}
                         <a class="dropdown-item" href="/logout">Logout</a>
+                        <a class="dropdown-item" href="/profile/{{user._id}}">Profile</a>
                     {{else}}
                         <a class="dropdown-item" href="/login">Login</a>
                     {{/if}}

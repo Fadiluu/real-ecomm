@@ -38,7 +38,7 @@ module.exports.connect = async () => {
   await client.connect()
   const db = client.db(dbname)
   state.db = db
-  console.log("Databse connected")
+  console.log("Database connected")
 }
 
 module.exports.get = function(){

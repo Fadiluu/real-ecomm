@@ -1,16 +1,18 @@
 <section>
     <div class="container">
         <div class="row mt-4">
-            <a href="/admin/add-product" class="btn btn-success ml-auto">Add Product</a>
+            <a href="/admin/add-product" class="btn btn-success ml-auto mb-4">Add Product</a>
         </div>
-        <table class="table mt-5">
+        <table class="table mt-5" id="productsTable">
           <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Title</th>
               <th scope="col">Category</th>
               <th scope="col">Description</th>
+              <th scope="col">Price</th>
               <th scope="col">Image</th>
+              <th scope="col">Options</th>
             </tr>
           </thead>
           <tbody>
@@ -20,6 +22,7 @@
               <td>{{this.Name}}</td>
               <td>{{this.Category}}</td>
               <td>{{this.Description}}</td>
+              <td>{{this.Price}}</td>
               <td><img style="width:50px;height: 50px;" src="/product-image/{{this._id}}.jpg" alt=""></td>
               <td>
                 <a href="/admin/edit-product/{{this._id}}" class="btn btn-primary">Edit</a>
@@ -31,3 +34,8 @@
         </table>
     </div>
 </section>
+<script>
+  $(document).ready( function () {
+    $('#productsTable').DataTable();
+} );
+</script>

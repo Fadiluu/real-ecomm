@@ -1,7 +1,6 @@
 <section class="h-100 h-custom">
   <div class="container ">
-
-          <table class="table mt-5">
+    <table class="table mt-5">
             <thead>
               <tr>
                 <th scope="col">Item</th>
@@ -13,20 +12,55 @@
                 {{#each products}}
 
                 <tr>
-
-                    <td><img style="width: 70px;height: 70px;" src="/product-image/{{this._id}}.jpg" alt=""></td>
-                    <td>{{this.Name}}</td>
+                    <td><img style="width: 70px;height: 70px;" src="/product-image/{{this.product._id}}.jpg" alt=""></td>
+                    <td>{{this.product.Name}}</td>
+                    <td>{{this.product.Price}}</td>
                     <td>
-                        <button class="cart-item-count mr-3">-</button>1<button class="cart-item-count ml-3">+</button>
+                        <button class="cart-item-count mr-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',-1)">-</button>
+                        <span id="{{this.product._id}}">{{this.quantity}}</span>
+                        <button class="cart-item-count ml-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',1)">+</button>
                     </td>
                     <td>
-                        <a href="" class="btn btn-danger">Remove</a>
+                        <a href="/remove-cart-item/{{this.product._id}}/{{this._id}}" class="btn btn-danger">Remove</a>
                         </td>
 
                 </tr>
                 {{/each}}
             </tbody>
           </table>
+          <hr>
+          <div class="float-right pr-5">
+            <h3 class="float-left mr-5 ">Total: <span id="total">{{total}}</span> AED</h3>
+            <a href="/place-order" class="btn btn-success mt-3" style="width:100%;" ><b>Place Order</b></a>
+          </div>
 
+          
   </div>
 </section>
+
+<script>
+    function changeQuantity(cartId,ProId,userId,count){
+
+      let quantity= parseInt(document.getElementById(ProId).innerHTML)
+    $.ajax({
+      url: '/change-product-quantity',
+      data:{
+        cart:cartId,
+        product:ProId,
+        user:userId,
+        count:count,
+        quantity:quantity
+      },
+      method: 'post',
+      success:(response)=>{
+        if(response.removeProduct){
+          alert("Product removed successfully")
+          location.reload()
+        }else{
+          document.getElementById(ProId).innerHTML=quantity+count
+          document.getElementById('total').innerHTML = response.total
+        }
+      }
+    })
+  }
+</script>

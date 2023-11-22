@@ -69,4 +69,13 @@ router.post('/edit-product/:id',(req,res)=>{
   })
 })
 
+router.get('/all-orders',async (req,res)=>{
+  let orders = await productHelper.getAllOrders()
+})
+
+router.get('/view-users',async(req,res)=>{
+  let users = await productHelper.getAllUser()
+  res.render('admin/view-users',{admin:true,users})
+})
+
 module.exports = router;
